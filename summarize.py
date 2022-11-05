@@ -51,18 +51,26 @@ Passage: """ + text + "\n\nTLDR:",
 def group_sentences(text):
     sentences = text.split(". ")
 
+    sentences_per_paragraph = 8
+
+    if len(sentences) < sentences_per_paragraph:
+        return [text]
+
     response = co.embed(texts=sentences)
     embeddings = np.array(response.embeddings)
+    print(embeddings)
 
     dot_products = np.dot(embeddings, embeddings.T)
+    print(dot_products)
 
     pairwise = []
     for i in range(len(dot_products) - 1):
         pairwise.append(dot_products[i][i+1])
 
+    print(pairwise)
     breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None)
 
-    num_breaks = len(sentences) // 8
+    num_breaks = len(sentences) // sentences_per_paragraph
     breaks = breaks[:num_breaks]
     breaks = np.sort(breaks)
 
