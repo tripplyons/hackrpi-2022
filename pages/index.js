@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import ProTip from '../src/ProTip';
 import Link from '../src/Link';
 import Copyright from '../src/Copyright';
+import EPICImage from '../components/EPICImage';
 
 export default function Index() {
   return (
@@ -13,6 +14,7 @@ export default function Index() {
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js example
         </Typography>
+        <EPICImage date='2019/05/30' id='epic_1b_20190530011359' />
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
