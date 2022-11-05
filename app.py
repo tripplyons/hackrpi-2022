@@ -32,8 +32,11 @@ def do_link_transcription():
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        #f.save(secure_filename(f.filename))
-        return "file uploaded sucessfully"
+        path = "tmp/" + str(hash(file.filename))
+        file.save(path)
+        text = transcribe(path)
+        os.remove(path)
+        return text
     return '''
     <!doctype html>
     <title>Upload new File</title>
