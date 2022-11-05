@@ -1,15 +1,18 @@
 import flask
 from flask import Flask, flash, request, redirect, url_for, request
 from werkzeug.utils import secure_filename
-import json 
+import json
 import os
 from whisper_functions import download, transcribe
+from summarize import summarize
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello_world():
     return app.send_static_file('index.html')
+
 
 @app.route("/t_url", methods=['GET'])
 def do_link_transcription():
@@ -22,10 +25,11 @@ def do_link_transcription():
 
     download(url, path)
     text = transcribe(path)
+    summary = summarize(text)
 
     os.remove(path)
 
-    return text, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+    return summary, 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 
 @app.route("/upload_file", methods=['GET', 'POST'])
@@ -34,9 +38,13 @@ def upload_file():
         file = request.files['file']
         path = "tmp/" + str(hash(file.filename))
         file.save(path)
+
         text = transcribe(path)
+        summary = summarize(text)
+
         os.remove(path)
-        return text
+
+        return summary, 200, {'Content-Type': 'text/plain; charset=utf-8'}
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -46,8 +54,3 @@ def upload_file():
       <input type=submit>
     </form>
     '''
-
-@app.route("/t_file", methods=['POST'])
-def do_file_transcription():
-    d = request.data
-    d['file'] = {''}
