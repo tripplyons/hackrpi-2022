@@ -15,7 +15,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 @app.route("/t_url", methods=['POST'])
-def do_transcription():
+def do_link_transcription():
     d = request.data
     d['url'] = {''}
 
@@ -47,6 +47,6 @@ def upload_file():
     '''
 
 @app.route("/t_file", methods=['POST'])
-def do_transcription():
+def do_file_transcription():
     d = request.data
     d['file'] = {''}
