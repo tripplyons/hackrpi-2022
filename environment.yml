@@ -127,6 +127,7 @@ dependencies:
   - pip:
     - brotli==1.0.9
     - click==8.1.3
+    - cohere==2.8.0
     - ffmpeg-python==0.2.0
     - filelock==3.8.0
     - flask==2.2.2
