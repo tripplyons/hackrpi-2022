@@ -19,12 +19,12 @@ export default function ImageGallery({ images }) {
           : null
       }
       <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
-        <Button onClick={() => {
+        <Button disabled={index == 0} onClick={() => {
           if (index > 0) {
             setIndex(index - 1);
           }
         }}>Previous</Button>
-        <Button onClick={() => {
+        <Button disabled={index == images.length - 1} onClick={() => {
           if (index < images.length - 1) {
             setIndex(index + 1);
           }
