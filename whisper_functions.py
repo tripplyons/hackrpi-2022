@@ -21,8 +21,8 @@ def transcribe(audio):
     options = whisper.DecodingOptions(language="en")
 
     text = ""
-    window_size = 480000
-    step_size = window_size // 10
+    window_size = 480000  # 30 seconds
+    step_size = window_size // 10  # 3 seconds
     skip_size = window_size - step_size
 
     for end in tqdm(range(window_size, len(audio) + skip_size, skip_size)):
@@ -63,9 +63,3 @@ def download(url, path='tmp/tmp.wav'):
 
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-
-
-id = 'HbY51mVKrcE'
-url = 'https://www.youtube.com/watch?v='+id
-download(url, path='tmp/'+id+'.wav')
-print(transcribe('tmp/'+id+'.wav'))
