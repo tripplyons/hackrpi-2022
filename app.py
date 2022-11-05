@@ -1,9 +1,9 @@
-
 import flask
 from flask import Flask, flash, request, redirect, url_for, request
 from werkzeug.utils import secure_filename
 import json 
 import os
+from whisper_functions import download, transcribe
 
 app = Flask(__name__)
 UPLOAD_FOLDER = './upload_temp/'
@@ -15,10 +15,21 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/t_url", methods=['POST'])
+@app.route("/t_url", methods=['GET'])
 def do_link_transcription():
-    d = request.data
-    d['url'] = {''}
+    args = request.args
+    url = args.get('url')
+
+    unique = hash(url)
+
+    path = 'tmp/' + str(unique) + '.wav'
+
+    download(url, path)
+    text = transcribe(path)
+
+    os.remove(path)
+
+    return text, 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 @app.route("/upload_file", methods=['GET', 'POST'])
 def upload_file():
@@ -51,38 +62,3 @@ def upload_file():
 def do_file_transcription():
     d = request.data
     d['file'] = {''}
-=======
-import flask
-from flask import Flask, flash, request, redirect, url_for, request
-from werkzeug.utils import secure_filename
-import json
-import os
-from whisper_functions import download, transcribe
-
-app = Flask(__name__)
-UPLOAD_FOLDER = './upload_temp/'
-ALLOWED_EXTENSIONS = {'mov', 'mp4', 'webm', 'mkv'}
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-
-@app.route("/t_url", methods=['GET'])
-def do_transcription():
-    args = request.args
-    url = args.get('url')
-
-    unique = hash(url)
-
-    path = 'tmp/' + str(unique) + '.wav'
-
-    download(url, path)
-    text = transcribe(path)
-
-    os.remove(path)
-
-    return text, 200, {'Content-Type': 'text/plain; charset=utf-8'}
