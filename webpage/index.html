@@ -1,9 +1,13 @@
 <html>
     <head>
-
     </head>
     <body>
-        <input id="youtubeLink"></input>
-        
+        <div id="uploadBox"  
+        ondrop="dropHandler(event);"
+        ondragover="dragOverHandler(event);"
+        style="width:100%; height:100%; background:green">
+            <input id="linkInput"></input>
+        </div>
+        <script src="js/main.js"></script>
     </body>
 </html>
