@@ -1,4 +1,4 @@
-import ImageGallery from "./ImageGallery";
+import ImageGallery from "components/ImageGallery";
 import { useState, useEffect } from "react";
 
 export default function ImageGalleryForDay({ date }) {

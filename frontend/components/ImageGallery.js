@@ -1,4 +1,4 @@
-import EPICImage from "./EPICImage";
+import EPICImage from "components/EPICImage";
 import { useState, useEffect } from "react";
 import { Container } from "@mui/system";
 import { Button, ButtonGroup } from "@mui/material";
