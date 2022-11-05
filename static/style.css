@@ -1,0 +1,61 @@
+body{
+	font-family: sans-serif;
+	width: 100%;
+	height: 100%;
+	background: #121269;
+	color: white;
+}
+h1{
+	color: white;
+	font-size: 5vh;
+	margin: 2vh;
+}
+p{
+	font-size: 2vh;
+	margin: 1vh;
+}
+#uploadBox {
+	box-shadow: 0px 10px 15px rgba(0,0,0,0.30);
+	width: 60vw;
+	height: 45vh;
+	background: #ACD9EC;
+	border-radius: 5px;
+}
+#linkInput{
+	text-align: center;
+	background_color: #cccaca;
+	border: none;
+	margin: 1vh;
+	font-size: 2vh;
+	border-radius: 5px;
+	width: 90%;
+	height: 4vh;
+}
+
+.GoButton{
+	border: none;
+	background: #449DD1;
+	color:  white;
+	transition-duration: 0.2s;
+	border-radius: 5px;
+	font-size: 2vh;
+	margin: 2vh;
+	width: 30%;
+	height: 5vh;
+}
+
+.GoButton:hover{
+	box-shadow: 0px 20px 15px rgba(0,0,0,0.25);
+}
+
+.GoButton:active{
+	box-shadow: none;
+}
+.prompt{
+	padding-top: 2vh;
+}
+img{
+	margin: 1.5vh;
+	height: 60%;
+	object-fit: contain;
+}

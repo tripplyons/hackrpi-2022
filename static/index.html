@@ -1,13 +1,20 @@
 <html>
     <head>
+        <title>Video Summerizer</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div id="uploadBox"  
-        ondrop="dropHandler(event);"
-        ondragover="dragOverHandler(event);"
-        style="width:100%; height:100%; background:green">
-            <input id="linkInput"></input>
-        </div>
-        <script src="js/main.js"></script>
+        <center>
+            <h1>yt 2 smry</h1>
+            <p><i>Ai Video Summarizer</i></p>
+            <div id="uploadBox" ondrop="dropHandler(event);"
+            ondragover="dragOverHandler(event);">
+            <p class="prompt">Upload a File</p>
+                <img src="File_Logo.svg" id="file_logo">
+                <input id="linkInput" placeholder="or copy a video link"></input>
+            </div>
+            <button class="GoButton">Summarize</button>
+            <script src="js/main.js"></script>
+        </center>
     </body>
 </html>
