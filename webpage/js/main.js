@@ -6,7 +6,7 @@ linkInput.addEventListener('keydown', function(e){
     if(e.key == 'Enter'){
         console.log(e)
         loading();
-        fetch("/t_url?url="+linkDiv.value, {
+        fetch("/t_url?url="+linkInput.value, {
             "credentials": "omit",
             "method": "GET",
             "mode": "cors"
