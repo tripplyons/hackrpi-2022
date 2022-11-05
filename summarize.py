@@ -1,5 +1,8 @@
+import numpy as np
+from tqdm import tqdm
 import cohere
 co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
+
 
 # if __name__ == '__main__':
 # prompt = """Passage: Is Wordle getting tougher to solve? Players seem to be convinced that the game has gotten harder in recent weeks ever since The New York Times bought it from developer Josh Wardle in late January. The Times has come forward and shared that this likely isn't the case. That said, the NYT did mess with the back end code a bit, removing some offensive and sexual language, as well as some obscure words There is a viral thread claiming that a confirmation bias was at play. One Twitter user went so far as to claim the game has gone to "the dusty section of the dictionary" to find its latest words.
@@ -45,18 +48,47 @@ Passage: """ + text + "\n\nTLDR:",
     return summary[:-2].strip()
 
 
+def group_sentences(text):
+    sentences = text.split(". ")
+
+    response = co.embed(texts=sentences)
+    embeddings = np.array(response.embeddings)
+
+    dot_products = np.dot(embeddings, embeddings.T)
+
+    pairwise = []
+    for i in range(len(dot_products) - 1):
+        pairwise.append(dot_products[i][i+1])
+
+    breaks = np.argsort(pairwise, axis=None)
+    num_breaks = len(sentences) // 8
+    breaks = breaks[:num_breaks]
+    breaks = np.sort(breaks)
+
+    groups = [
+        sentences[breaks[i]:breaks[i+1]]
+        for i in range(len(breaks) - 1)
+    ]
+    groups.append(sentences[breaks[-1]:])
+
+    return ['. '.join(group) for group in groups]
+
+
 def summarize(text):
-    sentences = text.split(".")
     summary = ""
 
-    step = 10
-    for i in range(0, len(sentences), step):
-        summary += summarize_single(".".join(sentences[i:i+step]))
+    groups = group_sentences(text)
+
+    for group in tqdm(groups):
+        summary += summarize_single(group)
+        if summary[-1] != '.':
+            summary += '.'
         summary += ' '
 
     return summary.strip()
 
 
 if __name__ == '__main__':
-    with open('example-transcripts/vector.txt', 'r') as f:
-        print(summarize(f.read()))
+    with open('example-transcripts/whisper.txt', 'r') as f:
+        text = f.read()
+        print(summarize(text))
