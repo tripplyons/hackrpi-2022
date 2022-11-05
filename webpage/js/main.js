@@ -14,7 +14,6 @@ linkInput.addEventListener('keydown', function(e){
             e.text().then(f=>{
                 setCaption(e);
             })
-            stopLoading();
         });
     }
 })
@@ -38,13 +37,22 @@ function dropHandler(ev) {
             if (item.kind === 'file') {
                 const file = item.getAsFile();
                 console.log(file);
+                let formData = new FormData();
+                             
+                formData.append("file", file);
+                fetch('/upload_file', {method: "POST", body: formData}).then(function(e) {
+                    e.text().then(f=>{
+                        setCaption(e);
+                    })
+                });
+                stopLoading();
             }
         })
     }
 }
 
 function setCaption(e) {
-
+    console.log(e);
 }
 function loading() {
 
