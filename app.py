@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return app.send_static_file('index.html')
 
 @app.route("/t_url", methods=['GET'])
 def do_link_transcription():
