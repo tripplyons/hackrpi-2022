@@ -39,7 +39,7 @@ Passage: ArtificialIvan, a seven-year-old, London-based payment and expense mana
 TLDR: ArtificialIvan has raised $190 million in Series C funding.
 --
 Passage: """ + text + "\n\nTLDR:",
-        max_tokens=200,
+        max_tokens=400,
         temperature=0,
         stop_sequences=["\n"])
 
@@ -60,7 +60,8 @@ def group_sentences(text):
     for i in range(len(dot_products) - 1):
         pairwise.append(dot_products[i][i+1])
 
-    breaks = np.argsort(pairwise, axis=None)
+    breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None)
+
     num_breaks = len(sentences) // 8
     breaks = breaks[:num_breaks]
     breaks = np.sort(breaks)
@@ -89,6 +90,6 @@ def summarize(text):
 
 
 if __name__ == '__main__':
-    with open('example-transcripts/whisper.txt', 'r') as f:
+    with open('example-transcripts/vector.txt', 'r') as f:
         text = f.read()
         print(summarize(text))
