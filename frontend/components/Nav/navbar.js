@@ -13,9 +13,32 @@ export default function navbar() {
             color="inherit"
             component={Link}
             noLinkStyle
-            href="/about"
+            href="/"
+            sx={{ mr: 2 }}
           >
             Home{" "}
+          </Typography>
+
+          <Typography
+            variant="h6"
+            color="inherit"
+            component={Link}
+            noLinkStyle
+            href="/videosInput "
+            sx={{ mr: 2 }}
+          >
+            Upload Video{" "}
+          </Typography>
+
+          <Typography
+            variant="h6"
+            color="inherit"
+            component={Link}
+            noLinkStyle
+            href="/about"
+            sx={{ mr: 2 }}
+          >
+            About{" "}
           </Typography>
         </Toolbar>
       </Container>

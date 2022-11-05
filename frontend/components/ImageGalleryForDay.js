@@ -1,4 +1,4 @@
-import ImageGallery from "components/ImageGallery";
+import ImageGallery from "./ImageGallery";
 import { useState, useEffect } from "react";
 
 export default function ImageGalleryForDay({ date }) {
@@ -15,9 +15,11 @@ export default function ImageGalleryForDay({ date }) {
   }, [date]);
 
   return (
-    <ImageGallery images={images.map(image => ({
-      date: date,
-      id: image.image
-    }))} />
+    <ImageGallery
+      images={images.map((image) => ({
+        date: date,
+        id: image.image,
+      }))}
+    />
   );
 }
