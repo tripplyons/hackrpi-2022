@@ -1,6 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
-import Navbar from "../frontend/components/Nav/navbar";
+import Navbar from "../components/Nav/navbar";
 export default function videosInput() {
   const [file, setfile] = useState("");
   const [typeOfUpload, setTypeOfUpload] = useState("1");

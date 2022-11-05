@@ -15,9 +15,11 @@ export default function ImageGalleryForDay({ date }) {
   }, [date]);
 
   return (
-    <ImageGallery images={images.map(image => ({
-      date: date,
-      id: image.image
-    }))} />
+    <ImageGallery
+      images={images.map((image) => ({
+        date: date,
+        id: image.image,
+      }))}
+    />
   );
 }
