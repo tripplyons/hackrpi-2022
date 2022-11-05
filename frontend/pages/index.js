@@ -7,15 +7,18 @@ import Link from "../src/Link";
 import Copyright from "../src/Copyright";
 import EPICImage from "../components/EPICImage";
 import ImageGalleryForDay from "../components/ImageGalleryForDay";
+import Navbar from "../components/Nav/navbar";
 
 export default function Index() {
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
+        <Navbar />
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js example
         </Typography>
         <EPICImage date="2019/05/30" id="epic_1b_20190530011359" />
+        <ImageGalleryForDay date="2019-05-30" />
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
