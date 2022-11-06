@@ -1,6 +1,7 @@
 inputDiv = document.getElementById('uploadBox');
 linkInput = document.getElementById('linkInput');
-goButton = document.getElementById('GoButton')
+goButton = document.getElementById('GoButton');
+guiBox   = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
@@ -10,7 +11,7 @@ closeSpan = document.getElementsById("closeModal");
 
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
-
+onclick="document.getElementById('fileInput').click();" 
 function uploadLink(e) {
     console.log('bruh');
     if (!e.key || e.key == 'Enter') {
