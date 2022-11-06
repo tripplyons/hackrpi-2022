@@ -1,6 +1,8 @@
 inputDiv   = document.getElementById('uploadBox');
 linkInput  = document.getElementById('linkInput');
 
+
+
 linkInput.addEventListener('keydown', function(e){
     console.log(e.key);
     if(e.key == 'Enter'){
