@@ -144,12 +144,10 @@ function loading() {
     resultsList.style.display = 'none';
     finalGuiBox.appendChild(loader);
     buttonDiv.style.display = 'none';
-    resetButton.style.display = 'none';
     console.log("STARTED LOADING");
 }
 function stopLoading() {
     finalGuiBox.removeChild(loader);
-    resetButton.style.display = 'block';
     buttonDiv.style.display = 'block';
     console.log("STOPPED LOADING");
 }
