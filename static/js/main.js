@@ -85,7 +85,7 @@ async function setCaption(e) {
         // display things
         list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
         list.innerHTML = array[i];
-
+        list.onclick = console.log(texts[i]);
         console.log(list)
 
         resultsList.append(list);

@@ -20,10 +20,15 @@ def do_link_transcription():
 
     unique = hash(url)
 
-    text = open('example-transcripts/vector.txt').read()
-    groups = '\n'.join(group_sentences(text))
+    if os.path.exists(path):
+        text = open('example-transcripts/vector.txt').read()
+        groups = '\n'.join(group_sentences(text))
 
-    return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+        os.remove(path)
+
+        return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+    else:
+        return 'Download Error', 500
 
 
 @app.route("/upload_file", methods=['GET', 'POST'])
@@ -33,12 +38,15 @@ def upload_file():
         path = "tmp/" + str(hash(file.filename))
         file.save(path)
 
-        text = open('example-transcripts/vector.txt').read()
-        groups = '\n'.join(group_sentences(text))
+        if os.path.exists(path):
+            text = open('example-transcripts/vector.txt').read()
+            groups = '\n'.join(group_sentences(text))
 
-        os.remove(path)
+            os.remove(path)
 
-        return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+            return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+
+        return 'Upload Error', 500
     return '''
     <!doctype html>
     <title>Upload new File</title>
