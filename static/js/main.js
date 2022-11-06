@@ -6,8 +6,11 @@ resultsDisplay = document.getElementById('resultsDisplay');
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
-closeSpan = document.getElementsById("closeModal");
+closeSpan = document.getElementById("closeSpan");
 
+closeSpan.onclick = function() {
+  detailsModal.style.display = "none";
+}
 
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
