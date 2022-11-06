@@ -32,9 +32,9 @@ def summarize_single(text, temperature=0.0):
         model='xlarge',
         prompt="""Tonight, the deadly tornado outbreak that tore across parts of three states. More than a dozen powerful twisters ripping across Texas, Arkansas, and Oklahoma. Entire neighborhoods leveled more than 100 homes destroyed. Terrified residents fleeing for cover
 TLDR: Tornadoes tore across parts of three states.
-
-""" + text + "\nTLDR:",
-        max_tokens=100,
+--
+Passage: """ + text + "\nTLDR:",
+        max_tokens=300,
         temperature=temperature,
         stop_sequences=["\n"])
 

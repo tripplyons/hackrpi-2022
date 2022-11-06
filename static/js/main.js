@@ -25,8 +25,7 @@ closeSpan.onclick = function () {
     detailsModal.style.display = "none";
 }
 
-linkInput.addEventListener('keydown', uploadLink)
-goButton.onclick = uploadLink;
+linkInput.addEventListener('keydown', uploadLink);
 
 inputDiv.style = 'cursor: pointer;'
 
