@@ -5,6 +5,7 @@ guiBox = document.getElementById('uploadBox');
 finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
+buttonDiv    = document.getElementById('buttonDiv')
 loader = document.createElement('div');
 loader.style['margin-bottom']='20px';
 loader.style['margin-top']   ='20px';
@@ -102,6 +103,8 @@ async function setCaption(e) {
     resultsDisplay.style.display = "block";
     selectionInterface.style.display = "none";
     texts = e.split('\n');
+    texts = texts.filter(e=>e.length);
+    console.log(texts);
     var array = [];
     async function getSummary(text) {
         let res = await fetch('/s_text', { method: "POST", body: text });
@@ -135,12 +138,14 @@ function loading() {
     resultsDisplay.style.display = 'block';
     resultsList.style.display = 'none';
     finalGuiBox.appendChild(loader);
+    buttonDiv.style.display = 'none';
     resetButton.style.display = 'none';
     console.log("STARTED LOADING");
 }
 function stopLoading() {
     finalGuiBox.removeChild(loader);
     resetButton.style.display = 'block';
+    buttonDiv.style.display = 'block';
     console.log("STOPPED LOADING");
 }
 function displayDetailsModal(title, message) {
@@ -150,3 +155,16 @@ function displayDetailsModal(title, message) {
     closeSpan.style.width = closeSpan.offsetHeight+'px'
 }
 
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}

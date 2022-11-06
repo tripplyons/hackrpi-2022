@@ -16,9 +16,6 @@ def hello_world():
 @app.route("/g_url", methods=['GET'])
 def do_link_transcription():
     args = request.args
-    url = args.get('url')
-
-    unique = hash(url)
     if path:
         text = open('example-transcripts/vector.txt').read()
         groups = '\n'.join(group_sentences(text))
