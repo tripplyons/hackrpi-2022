@@ -1,19 +1,22 @@
 inputDiv   = document.getElementById('uploadBox');
 linkInput  = document.getElementById('linkInput');
 
+
+
 linkInput.addEventListener('keydown', function(e){
     console.log(e.key);
     if(e.key == 'Enter'){
         console.log(e)
         loading();
-        fetch("/t_url?url="+linkDiv.value, {
+        fetch("/t_url?url="+linkInput.value, {
             "credentials": "omit",
             "method": "GET",
             "mode": "cors"
         }).then(function(e) {
             e.text().then(f=>{
                 setCaption(f);
-            })
+            });
+            stopLoading();
         });
     }
 })
@@ -43,16 +46,36 @@ function dropHandler(ev) {
                 fetch('/upload_file', {method: "POST", body: formData}).then(function(e) {
                     e.text().then(f=>{
                         setCaption(f);
-                    })
+                    });
                 });
                 stopLoading();
             }
         })
     }
 }
-
 function setCaption(e) {
     console.log(e);
+    texts = e.split('\n');
+    var array = [];
+    array.length = texts.length+1;
+    console.log(texts);
+    async function getSummary(k){
+        console.log(texts[k]);
+        if(k+1 > texts.length){
+            array[array.length-1] = true;
+            return false;
+        } else {
+            return fetch('/s_text', {method:"POST", body:k}).then(
+                e.text().then(f=>{
+                    console.log(f);
+                    array[k]=f;
+                    getSummary(k+1);
+                })
+            );
+        }
+    }
+    console.log("jf");
+    return array.join('\n')
 }
 function loading() {
 
