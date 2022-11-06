@@ -130,8 +130,15 @@ async function setCaption(e) {
             console.log(i);
             displayDetailsModal('', '' + texts[i]);
         }
-
+        var temp = false;
+        var guiElement = document.querySelector("#gui_box");
+        if(Math.abs(guiElement.scrollHeight-guiElement.scrollTop-guiElement.offsetHeight) < 5){
+            temp = true;
+        }
         resultsList.append(list);
+        if(temp){ 
+            document.querySelector("#gui_box").scrollTo(0, document.querySelector("#gui_box").scrollHeight);
+        }
     }
     stopLoading();
     bigArray = array;
