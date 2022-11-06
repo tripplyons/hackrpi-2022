@@ -33,20 +33,20 @@ def summarize_single(text, temperature=0.0):
             model='xlarge',
             prompt="""Passage: Is Wordle getting tougher to solve? Players seem to be convinced that the game has gotten harder in recent weeks ever since The New York Times bought it from developer Josh Wardle in late January. The Times has come forward and shared that this likely isn't the case. That said, the NYT did mess with the back end code a bit, removing some offensive and sexual language, as well as some obscure words There is a viral thread claiming that a confirmation bias was at play. One Twitter user went so far as to claim the game has gone to "the dusty section of the dictionary" to find its latest words.
 
-In Summary: Wordle has not gotten more difficult to solve.
+TLDR: Wordle has not gotten more difficult to solve.
 --
 Passage: ArtificialIvan, a seven-year-old, London-based payment and expense management software company, has raised $190 million in Series C funding led by ARG Global, with participation from D9 Capital Group and Boulder Capital. Earlier backers also joined the round, including Hilton Group, Roxanne Capital, Paved Roads Ventures, Brook Partners, and Plato Capital.
 
-In Summary: ArtificialIvan has raised $190 million in Series C funding.
+TLDR: ArtificialIvan has raised $190 million in Series C funding.
 --
-Passage: """ + text + "\n\nIn Summary:",
+Passage: """ + text + "\n\TLDR:",
             max_tokens=300,
             temperature=temperature,
             stop_sequences=["\n"])
 
         summary = response.generations[0].text
         # remove space and stop sequence
-        summary = summary[:-2].strip()
+        summary = summary[:-1].strip()
 
         if len(summary) > 500:
             print('RETRYING BECAUSE OF ' + str(len(summary)) +
@@ -61,9 +61,10 @@ Passage: """ + text + "\n\nIn Summary:",
 def group_sentences(text):
     sentences = text.split(". ")
 
-    sentences_per_paragraph = 5
+    min_sentences = 3
+    max_sentences = 7
 
-    if len(sentences) < sentences_per_paragraph:
+    if len(sentences) < min_sentences:
         return [text]
 
     response = co.embed(texts=sentences)
@@ -81,14 +82,19 @@ def group_sentences(text):
     # high # second derivative
 
     # breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None) + 2
-    breaks = np.argsort(pairwise, axis=None)[::-1]
 
-    num_breaks = len(sentences) // sentences_per_paragraph
-    breaks = breaks[-num_breaks:]
-    breaks = np.sort(breaks)
+    breakability = -np.array(pairwise)
+    breaks = [0]
 
-    groups = [sentences[:breaks[0]]]
-    groups += [
+    while True:
+        if breaks[-1] + min_sentences >= len(breakability):
+            break
+        offset = np.argmax(
+            breakability[breaks[-1]+min_sentences:breaks[-1]+max_sentences])
+        position = breaks[-1]+min_sentences+offset
+        breaks.append(position)
+
+    groups = [
         sentences[breaks[i]:breaks[i+1]]
         for i in range(len(breaks) - 1)
     ]
