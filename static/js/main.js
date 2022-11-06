@@ -1,8 +1,9 @@
-inputDiv   = document.getElementById('uploadBox');
-linkInput  = document.getElementById('linkInput');
-goButton   = document.getElementsByClassName('GoButton')[0];
-console.log("amogsu");
-
+inputDiv = document.getElementById('uploadBox');
+linkInput = document.getElementById('linkInput');
+goButton = document.getElementById('GoButton')
+resultsDisplay = document.getElementById('resultsDisplay');
+resultsDisplay.style.display = "none";
+selectionInterface = document.getElementById('selectionInterface');
 
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
@@ -54,20 +55,23 @@ function dropHandler(ev) {
     }
 }
 async function setCaption(e) {
+    resultsDisplay.style.display = "block";
+    selectionInterface.style.display = "none";
+
     console.log(e);
     texts = e.split('\n');
     var array = [];
     console.log(texts);
     async function getSummary(k) {
-        console.log(texts[k]);
         let res = await fetch('/s_text', { method: "POST", body: texts[k] });
         return await res.text();
     }
 
+    resultsList = document.getElementById('resultsList');
     for (var i = 0; i < texts.length; i++) {
         array.push(await getSummary(i));
         // display things
-        console.log(array[i]);
+        resultsList.innerHTML += `<li>${array[i]}</li>`;
     }
     return array.join('\n')
 }
