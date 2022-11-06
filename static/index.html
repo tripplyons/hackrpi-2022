@@ -16,7 +16,7 @@
             </div>
         </div>
         <div id="resultsDisplay">
-            <div class="gui_box">
+            <div id="gui_box" class="gui_box">
                 <ul id="resultsList">
                 </ul>
             </div>
@@ -24,7 +24,6 @@
             <button class="GoButton" onclick="location.reload()">Do Again</button>
         </div>
         <div id="selectionInterface">
-
             <div class="gui_box" id="uploadBox" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
                 <p class="prompt">Upload a File...</p>
                 <img src="/static/File_Logo.svg" id="file_logo">
@@ -36,6 +35,8 @@
             <button class="GoButton">Summarize</button>
         </div>
         <script src="/static/js/main.js"></script>
+        <!-- This is not supposed to show dont worry-->
+        <input id="fileInput" type="file" style="display:none;" />
     </center>
 </body>
 
