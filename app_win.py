@@ -20,12 +20,8 @@ def do_link_transcription():
 
     unique = hash(url)
 
-    path = 'tmp/' + str(unique) + '.wav'
-
     text = open('example-transcripts/vector.txt').read()
     groups = '\n'.join(group_sentences(text))
-
-    os.remove(path)
 
     return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
 

@@ -1,28 +1,30 @@
 inputDiv   = document.getElementById('uploadBox');
 linkInput  = document.getElementById('linkInput');
-goButton   = document.getElementById('GoButton')
+goButton   = document.getElementsByClassName('GoButton')[0];
+console.log("amogsu");
 
-linkInput.addEventListener('keydown', function (e) {
-    console.log(e.key);
-    if (e.key == 'Enter') {
+
+linkInput.addEventListener('keydown', uploadLink)
+goButton.onclick = uploadLink;
+
+function uploadLink(e) {
+    console.log('bruh');
+    if (!e.key || e.key == 'Enter') {
         console.log(e)
         loading();
-        fetch("/t_url?url=" + linkInput.value, {
+        fetch("/g_url?url=" + linkInput.value, {
             "credentials": "omit",
             "method": "GET",
             "mode": "cors"
         }).then(function (e) {
             e.text().then(f => {
-                setCaption(f);
+                setCaption(f).then(stopLoading);
             });
             stopLoading();
         });
     }
-})
-
+}
 function dragOverHandler(ev) {
-    console.log('File(s) in drop zone');
-    console.log("bruh")
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
 }
@@ -44,10 +46,9 @@ function dropHandler(ev) {
                 formData.append("file", file);
                 fetch('/upload_file', { method: "POST", body: formData }).then(function (e) {
                     e.text().then(f => {
-                        setCaption(f);
+                        setCaption(f).then(stopLoading);
                     });
                 });
-                stopLoading();
             }
         })
     }
@@ -68,12 +69,13 @@ async function setCaption(e) {
         // display things
         console.log(array[i]);
     }
-
     return array.join('\n')
 }
-function loading() {
 
+
+function loading() {
+    console.log("STARTED LOADING");
 }
 function stopLoading() {
-
+    console.log("STOPPED LOADING");
 }
