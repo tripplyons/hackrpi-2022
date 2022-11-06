@@ -101,4 +101,8 @@ function loading() {
 function stopLoading() {
     console.log("STOPPED LOADING");
 }
+function displayDetailsModal(title, message){
+    var infoText = document.getElementById("DetailedResultsModalText");
+    infoText.innerHTML = message;
+}
 
