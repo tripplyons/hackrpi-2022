@@ -4,7 +4,10 @@ goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
-
+k = document.createElement('object');
+k.data = 'bars.svg'
+k.type = "image/svg+xml"
+guiBox.append(k);
 
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
@@ -86,11 +89,11 @@ function dropHandler(ev) {
         })
     }
 }
+
 async function setCaption(e) {
     resultsDisplay.style.display = "block";
     selectionInterface.style.display = "none";
 
-    console.log(e);
     texts = e.split('\n');
     console.log(texts);
     var array = [];
