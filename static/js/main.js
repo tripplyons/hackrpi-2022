@@ -8,6 +8,7 @@ resetButton = document.getElementById('resetButton');
 buttonDiv = document.getElementById('buttonDiv');
 downloadButton = document.getElementById('DownloadButton');
 loader = document.createElement('div');
+statusText = document.getElementById('StatusText');
 loader.style['margin-bottom'] = '20px';
 loader.style['margin-top'] = '20px';
 loader.id = 'loader_wrapper';
@@ -150,6 +151,7 @@ async function setCaption(e) {
 function loading() {
     selectionInterface.style.display = 'none';
     resultsDisplay.style.display = 'block';
+    statusText.innerHTML = "Summarizing:"
     resultsList.style.display = 'none';
     finalGuiBox.appendChild(loader);
     buttonDiv.style.display = 'none';
@@ -157,6 +159,7 @@ function loading() {
 }
 function stopLoading() {
     finalGuiBox.removeChild(loader);
+    statusText.innerHTML = "Summary:"
     buttonDiv.style.display = 'inline';
     console.log("STOPPED LOADING");
 }
