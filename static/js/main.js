@@ -25,6 +25,7 @@ detailsModal = document.getElementById('DetailedResultsModal');
 closeSpan = document.getElementById("closeSpan");
 
 resetButton.onclick = () => {
+    linkInput.value = "";
     location.reload();
 }
 
