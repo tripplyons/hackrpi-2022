@@ -90,6 +90,7 @@ ul{
 }
 
 .GoButton{
+	display: inline-block;
 	border: none;
 	background: #5194BB;
 	color:  white;
@@ -133,4 +134,8 @@ img{
 }
 #DetailedResultsModalContent{
 	text-align:left;
+}
+
+#buttonDiv{
+	display: inline;
 }
