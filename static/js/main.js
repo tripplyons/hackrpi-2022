@@ -4,12 +4,28 @@ goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
 uploadForm = document.getElementById('uploadForm');
+resetButton = document.getElementById('resetButton');
 
 
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
 closeSpan = document.getElementById("closeSpan");
+
+resetButton.onclick = () => {
+    uploadForm.reset();
+    location.reload();
+}
+
+document.onload = () => {
+    uploadForm.reset();
+}
+
+window.onclick = function(event) {
+  if (event.target == detailsModal) {
+    detailsModal.style.display = "none";
+  }
+}
 
 closeSpan.onclick = function () {
     detailsModal.style.display = "none";
@@ -107,6 +123,7 @@ async function setCaption(e) {
         // display things
         list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
         list.innerHTML = array[i];
+        list.style = 'cursor:pointer'
         list.onclick = function() {
             displayDetailsModal('', texts[i]);
         }
