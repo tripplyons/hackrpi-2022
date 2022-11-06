@@ -7,6 +7,11 @@ body{
 #resultsDisplay{
 	display: none;
 }
+#closeSpan{
+	float: right;
+	font-size: 3vh;
+	font-weight: bold;
+}
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -59,6 +64,7 @@ ul{
 	height: 35vh;
 }
 #linkInput{
+	transition-duration: 0.2s;
 	text-align: center;
 	background_color: #cccaca;
 	border: none;
@@ -68,6 +74,11 @@ ul{
 	width: 60vw;
 	max-width: 600px;
 	height: 4vh;
+}
+#linkInput:focus{
+	border: none;
+	outline: none;
+	box-shadow: 0px 20px 15px rgba(0,0,0,0.25);
 }
 
 .GoButton{
