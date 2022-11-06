@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 import json
 import os
 from whisper_functions import download, transcribe
-from summarize import summarize, group_sentences
+from summarize import summarize_single, group_sentences
 
 app = Flask(__name__)
 
@@ -60,6 +60,6 @@ def upload_file():
 def do_text_summarization():
     text = request.data.decode('utf-8')
 
-    summary = summarize(text)
+    summary = summarize_single(text)
 
     return summary, 200, {'Content-Type': 'text/plain; charset=utf-8'}
