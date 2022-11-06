@@ -68,7 +68,6 @@ function dropHandler(ev) {
     console.log('File(s) dropped');
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
-
     if (ev.dataTransfer.items) {
         // Use DataTransferItemList interface to access the file(s)
         [...ev.dataTransfer.items].forEach((item, i) => {
@@ -99,23 +98,24 @@ async function setCaption(e) {
 
     console.log(e);
     texts = e.split('\n');
-    texts = texts.filter(e=>e.length>0);
-    var array = [];
     console.log(texts);
-    async function getSummary(k) {
-        let res = await fetch('/s_text', { method: "POST", body: texts[k] });
+    var array = [];
+    async function getSummary(text) {
+        let res = await fetch('/s_text', { method: "POST", body: text });
         return await res.text();
     }
 
     resultsList = document.getElementById('resultsList');
-    for (var i = 0; i < texts.length; i++) {
-        array.push(await getSummary(i));
+    for (let i = 0; i < texts.length; i++) {
+        console.log(texts[i]);
+        array.push(await getSummary(texts[i]));
         // display things
         list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
         list.innerHTML = array[i];
         list.style = 'cursor:pointer'
         list.onclick = function () {
-            displayDetailsModal('', texts[i]);
+            console.log(i);
+            displayDetailsModal('', ''+texts[i]);
         }
 
         resultsList.append(list);
