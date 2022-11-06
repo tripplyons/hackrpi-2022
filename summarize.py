@@ -28,34 +28,22 @@ co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
 
 
 def summarize_single(text, temperature=0.0):
-    try:
-        response = co.generate(
-            model='xlarge',
-            prompt="""Passage: Is Wordle getting tougher to solve? Players seem to be convinced that the game has gotten harder in recent weeks ever since The New York Times bought it from developer Josh Wardle in late January. The Times has come forward and shared that this likely isn't the case. That said, the NYT did mess with the back end code a bit, removing some offensive and sexual language, as well as some obscure words There is a viral thread claiming that a confirmation bias was at play. One Twitter user went so far as to claim the game has gone to "the dusty section of the dictionary" to find its latest words.
-
-To summarize, Wordle has not gotten more difficult to solve.
+    response = co.generate(
+        model='xlarge',
+        prompt="""
+Tonight, the deadly tornado outbreak that tore across parts of three states. More than a dozen powerful twisters ripping across Texas, Arkansas, and Oklahoma. Entire neighborhoods leveled more than 100 homes destroyed. Terrified residents fleeing for cover
+TLDR: Tornadoes tore across parts of three states.
 --
-Passage: ArtificialIvan, a seven-year-old, London-based payment and expense management software company, has raised $190 million in Series C funding led by ARG Global, with participation from D9 Capital Group and Boulder Capital. Earlier backers also joined the round, including Hilton Group, Roxanne Capital, Paved Roads Ventures, Brook Partners, and Plato Capital.
-
-To summarize, ArtificialIvan has raised $190 million in Series C funding.
---
-Passage: """ + text + "\n\nTo summarize, ",
+Passage: """ + text + "\n\TLDR:",
             max_tokens=300,
             temperature=temperature,
             stop_sequences=["\n"])
 
-        summary = response.generations[0].text
-        # remove space and stop sequence
-        summary = summary[:-1].strip()
+    summary = response.generations[0].text
+    # remove space and stop sequence
+    summary = summary[:-1].strip()
 
-        if len(summary) > 500:
-            print('RETRYING BECAUSE OF ' + str(len(summary)) +
-                  ' LENGTH' + ' ' + str(temperature))
-            return summarize_single(text, temperature=temperature + 0.1)
-        return summary
-    except:
-        pass
-    return summarize_single(text, temperature=temperature)
+    return summary
 
 
 def group_sentences(text):
