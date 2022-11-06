@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 import json
 import os
 from whisper_functions import download, transcribe
-from summarize import summarize
+from summarize import summarize, group_sentences
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def hello_world():
     return app.send_static_file('index.html')
 
 
-@app.route("/t_url", methods=['GET'])
+@app.route("/g_url", methods=['GET'])
 def do_link_transcription():
     args = request.args
     url = args.get('url')
@@ -25,11 +25,11 @@ def do_link_transcription():
 
     download(url, path)
     text = transcribe(path)
-    summary = summarize(text)
+    groups = '\n'.join(group_sentences(text))
 
     os.remove(path)
 
-    return summary, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+    return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 
 @app.route("/upload_file", methods=['GET', 'POST'])
@@ -40,11 +40,11 @@ def upload_file():
         file.save(path)
 
         text = transcribe(path)
-        summary = summarize(text)
+        groups = '\n'.join(group_sentences(text))
 
         os.remove(path)
 
-        return summary, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+        return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -54,3 +54,12 @@ def upload_file():
       <input type=submit>
     </form>
     '''
+
+
+@app.route("/s_text", methods=['POST'])
+def do_text_summarization():
+    text = request.data.decode('utf-8')
+
+    summary = summarize(text)
+
+    return summary, 200, {'Content-Type': 'text/plain; charset=utf-8'}
