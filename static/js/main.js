@@ -3,7 +3,6 @@ linkInput = document.getElementById('linkInput');
 goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
-uploadForm = document.getElementById('uploadForm');
 resetButton = document.getElementById('resetButton');
 
 
@@ -21,10 +20,10 @@ document.onload = () => {
     uploadForm.reset();
 }
 
-window.onclick = function(event) {
-  if (event.target == detailsModal) {
-    detailsModal.style.display = "none";
-  }
+window.onclick = function (event) {
+    if (event.target == detailsModal) {
+        detailsModal.style.display = "none";
+    }
 }
 
 closeSpan.onclick = function () {
@@ -34,24 +33,14 @@ closeSpan.onclick = function () {
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
 
-inputDiv.onclick = e => {
-    document.getElementById('fileInput').click();
-}
 inputDiv.style = 'cursor: pointer;'
-
-document.getElementById('hiddenFrame').onload = function () {
-    setCaption(this.contentDocument.body.innerText);
-}
 
 function showError() {
     alert("Error");
 }
 
 function uploadLink(e) {
-    if(!linkInput.value){
-        uploadForm.submit();
-    }
-    else if (!e.key || e.key == 'Enter') {
+    if (!e.key || e.key == 'Enter') {
         console.log(e)
         loading();
         fetch("/g_url?url=" + linkInput.value, {
@@ -124,7 +113,7 @@ async function setCaption(e) {
         list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
         list.innerHTML = array[i];
         list.style = 'cursor:pointer'
-        list.onclick = function() {
+        list.onclick = function () {
             displayDetailsModal('', texts[i]);
         }
 
@@ -141,7 +130,7 @@ function loading() {
 function stopLoading() {
     console.log("STOPPED LOADING");
 }
-function displayDetailsModal(title, message){
+function displayDetailsModal(title, message) {
     var infoText = document.getElementById("DetailedResultsModalText");
     infoText.innerHTML = message;
     detailsModal.style.display = "block";
