@@ -87,7 +87,7 @@ def summarize(text):
 
     for group in tqdm(groups):
         summary += summarize_single(group)
-        if summary[-1] != '.':
+        if len(summary) != 0 and summary[-1] != '.':
             summary += '.'
         summary += ' '
 
