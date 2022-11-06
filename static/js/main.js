@@ -5,12 +5,13 @@ guiBox = document.getElementById('uploadBox');
 finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
-buttonDiv    = document.getElementById('buttonDiv')
+buttonDiv    = document.getElementById('buttonDiv');
+downloadButton = document.getElementById('downloadButton');
 loader = document.createElement('div');
 loader.style['margin-bottom']='20px';
 loader.style['margin-top']   ='20px';
 loader.id = 'loader_wrapper';
-
+var bigArray = [];
 k = document.createElement('object');
 k.data = '/static/bars.svg';
 k.type = "image/svg+xml";
@@ -130,6 +131,7 @@ async function setCaption(e) {
         resultsList.append(list);
     }
     stopLoading();
+    bigArray = array;
     return array.join('\n')
 }
 
