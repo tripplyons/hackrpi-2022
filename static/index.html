@@ -16,12 +16,16 @@
             </div>
         </div>
         <div id="resultsDisplay">
-            <ul id="resultsList">
-            </ul>
+            <div class="gui_box">
+                <ul id="resultsList">
+                </ul>
+            </div>
+            <img src="/static/bars-scale-middle.svg">
             <button class="GoButton" onclick="location.reload()">Do Again</button>
         </div>
         <div id="selectionInterface">
-            <div id="uploadBox" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+
+            <div class="gui_box" id="uploadBox" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
                 <p class="prompt">Upload a File...</p>
                 <img src="/static/File_Logo.svg" id="file_logo">
             </div>
