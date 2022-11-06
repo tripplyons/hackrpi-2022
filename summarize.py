@@ -80,13 +80,15 @@ def group_sentences(text):
     # low, high # first derivative
     # high # second derivative
 
-    breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None) + 2
+    # breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None) + 2
+    breaks = np.argsort(pairwise, axis=None)[::-1]
 
     num_breaks = len(sentences) // sentences_per_paragraph
     breaks = breaks[-num_breaks:]
     breaks = np.sort(breaks)
 
-    groups = [
+    groups = [sentences[:breaks[0]]]
+    groups += [
         sentences[breaks[i]:breaks[i+1]]
         for i in range(len(breaks) - 1)
     ]
@@ -101,10 +103,10 @@ def summarize(text):
     groups = group_sentences(text)
 
     for group in tqdm(groups):
-        print(group)        # summary += summarize_single(group)
-        # if len(summary) != 0 and summary[-1] != '.':
-        #     summary += '.'
-        # summary += ' '
+        summary += summarize_single(group)
+        if len(summary) != 0 and summary[-1] != '.':
+            summary += '.'
+        summary += ' '
 
     return summary.strip()
 
