@@ -52,7 +52,8 @@ p{
 	max-width: 600px;
 }
 ul{
-	margin: 10vh auto;
+	padding: 2vh;
+	text-align: left;
 }
 #uploadBox {
 	height: 35vh;

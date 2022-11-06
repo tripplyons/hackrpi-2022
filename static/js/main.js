@@ -12,12 +12,7 @@ detailsModal = document.getElementById('DetailedResultsModal');
 closeSpan = document.getElementById("closeSpan");
 
 resetButton.onclick = () => {
-    uploadForm.reset();
     location.reload();
-}
-
-document.onload = () => {
-    uploadForm.reset();
 }
 
 window.onclick = function (event) {
