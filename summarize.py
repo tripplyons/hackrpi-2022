@@ -75,10 +75,15 @@ def group_sentences(text):
     for i in range(len(dot_products) - 1):
         pairwise.append(dot_products[i][i+1])
 
-    breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None)
+    # a, a, b, b
+    # high, low, high # pairs
+    # low, high # first derivative
+    # high # second derivative
+
+    breaks = np.argsort(np.diff(np.diff(pairwise)), axis=None) + 2
 
     num_breaks = len(sentences) // sentences_per_paragraph
-    breaks = breaks[:num_breaks]
+    breaks = breaks[-num_breaks:]
     breaks = np.sort(breaks)
 
     groups = [
@@ -96,10 +101,10 @@ def summarize(text):
     groups = group_sentences(text)
 
     for group in tqdm(groups):
-        summary += summarize_single(group)
-        if len(summary) != 0 and summary[-1] != '.':
-            summary += '.'
-        summary += ' '
+        print(group)        # summary += summarize_single(group)
+        # if len(summary) != 0 and summary[-1] != '.':
+        #     summary += '.'
+        # summary += ' '
 
     return summary.strip()
 
