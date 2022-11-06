@@ -83,7 +83,12 @@ async function setCaption(e) {
     for (var i = 0; i < texts.length; i++) {
         array.push(await getSummary(i));
         // display things
-        resultsList.innerHTML += `<li>${array[i]}</li>`;
+        list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
+        list.innerHTML = array[i];
+
+        console.log(list)
+
+        resultsList.append(list);
     }
     return array.join('\n')
 }
