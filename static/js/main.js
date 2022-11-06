@@ -1,7 +1,7 @@
 inputDiv = document.getElementById('uploadBox');
 linkInput = document.getElementById('linkInput');
 goButton = document.getElementById('GoButton');
-guiBox   = document.getElementById('gui_box');
+guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
@@ -85,6 +85,8 @@ async function setCaption(e) {
 
 
 function loading() {
+    guiBox.style.display = 'none';
+    resultsDisplay.style.display = 'none';
     console.log("STARTED LOADING");
 }
 function stopLoading() {

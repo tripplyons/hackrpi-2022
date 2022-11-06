@@ -4,6 +4,9 @@ body{
 	color: white;
 	display: block;
 }
+#resultsDisplay{
+	display: none;
+}
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
