@@ -30,7 +30,10 @@ co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
 def summarize_single(text, temperature=0.0):
     response = co.generate(
         model='xlarge',
-        prompt="""Tonight, the deadly tornado outbreak that tore across parts of three states. More than a dozen powerful twisters ripping across Texas, Arkansas, and Oklahoma. Entire neighborhoods leveled more than 100 homes destroyed. Terrified residents fleeing for cover
+        prompt="""That seems like a pretty straightforward directive. You could put a lot of stuff on the ground and have it stay there. Years ago, I optimistically stacked these pavers behind my shed with the false hope that I would use them in a landscaping project someday, but their most likely future is to sit here in the shady purgatory for all of eternity. Unfortunately, buildings and other structures are a little different. Mainly, they're large enough that one part could move relative to the other parts, a phenomenon we call differential movement. When you move one piece of anything relative to the rest of it, you introduce stress
+TLDR: Differential movement is when one part of something moves relative to the rest of it.
+
+Tonight, the deadly tornado outbreak that tore across parts of three states. More than a dozen powerful twisters ripping across Texas, Arkansas, and Oklahoma. Entire neighborhoods leveled more than 100 homes destroyed. Terrified residents fleeing for cover
 TLDR: Tornadoes tore across parts of three states.
 --
 Passage: """ + text + "\nTLDR:",
