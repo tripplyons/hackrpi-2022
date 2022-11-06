@@ -1,7 +1,6 @@
 inputDiv   = document.getElementById('uploadBox');
 linkInput  = document.getElementById('linkInput');
-
-
+goButton   = document.getElementById('GoButton')
 
 linkInput.addEventListener('keydown', function(e){
     console.log(e.key);
