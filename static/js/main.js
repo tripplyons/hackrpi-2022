@@ -3,6 +3,8 @@ linkInput = document.getElementById('linkInput');
 goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
+
+
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
@@ -14,7 +16,10 @@ closeSpan.onclick = function() {
 
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
-onclick="document.getElementById('fileInput').click();" 
+
+inputDiv.onclick=e=>{document.getElementById('fileInput').click();}
+inputDiv.style  ='cursor: pointer;'
+
 function uploadLink(e) {
     console.log('bruh');
     if (!e.key || e.key == 'Enter') {
@@ -83,7 +88,6 @@ async function setCaption(e) {
     return array.join('\n')
 }
 
-
 function loading() {
     guiBox.style.display = 'none';
     resultsDisplay.style.display = 'none';
@@ -92,3 +96,4 @@ function loading() {
 function stopLoading() {
     console.log("STOPPED LOADING");
 }
+
