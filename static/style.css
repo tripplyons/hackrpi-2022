@@ -6,6 +6,7 @@ body{
 }
 #resultsDisplay{
 	display: none;
+	overflow-y: scroll;
 }
 #closeSpan{
 	float: right;
@@ -31,6 +32,8 @@ body{
 	width: 60vw;
 	max-width: 600px;
 	margin: 10% auto;
+	max-height: 65vh;
+	overflow-y: scroll;
 }
 #close {
   color: #aaa;
