@@ -124,8 +124,8 @@ async function setCaption(e) {
 }
 
 function loading() {
-    guiBox.style.display = 'none';
-    resultsDisplay.style.display = 'none';
+    selectionInterface.style.display = 'none';
+    resultsDisplay.style.display = 'block';
     console.log("STARTED LOADING");
 }
 function stopLoading() {
