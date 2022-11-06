@@ -4,6 +4,7 @@ goButton = document.getElementById('GoButton')
 resultsDisplay = document.getElementById('resultsDisplay');
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
+detailsModal = document.getElementById('DetailedResultsModal')
 
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
