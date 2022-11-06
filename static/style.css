@@ -2,8 +2,9 @@ body{
 	font-family: sans-serif;
 	width: 100%;
 	height: 100%;
-	background: #121269;
+	background: #1D1D4E;
 	color: white;
+	display: block;
 }
 h1{
 	color: white;
@@ -17,9 +18,9 @@ p{
 #uploadBox {
 	box-shadow: 0px 10px 15px rgba(0,0,0,0.30);
 	width: 60vw;
-	height: 45vh;
-	background: #ACD9EC;
-	border-radius: 5px;
+	height: 35vh;
+	background: #9FC3D2;
+	border-radius: 10px;
 }
 #linkInput{
 	text-align: center;
@@ -27,20 +28,20 @@ p{
 	border: none;
 	margin: 1vh;
 	font-size: 2vh;
-	border-radius: 5px;
-	width: 90%;
+	border-radius: 10px;
+	width: 60vw;
 	height: 4vh;
 }
 
 .GoButton{
 	border: none;
-	background: #449DD1;
+	background: #5194BB;
 	color:  white;
 	transition-duration: 0.2s;
-	border-radius: 5px;
+	border-radius: 10px;
 	font-size: 2vh;
-	margin: 2vh;
-	width: 30%;
+	margin: 1vh;
+	width: 25%;
 	height: 5vh;
 }
 
@@ -55,7 +56,7 @@ p{
 	padding-top: 2vh;
 }
 img{
-	margin: 1.5vh;
-	height: 60%;
+	margin: 1vh;
+	height: 75%;
 	object-fit: contain;
 }
