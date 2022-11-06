@@ -41,7 +41,7 @@ TLDR: Tornadoes tore across parts of three states.
 
     summary = response.generations[0].text
     # remove space and stop sequence
-    summary = summary[:-1].strip()
+    summary = summary.strip()
 
     return summary
 
