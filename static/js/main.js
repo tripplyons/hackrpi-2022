@@ -106,13 +106,15 @@ async function setCaption(e) {
     }
 
     resultsList = document.getElementById('resultsList');
-    for (var i = 0; i < texts.length; i++) {
+    for (let i = 0; i < texts.length; i++) {
+        console.log(texts[i]);
         array.push(await getSummary(texts[i]));
         // display things
         list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
         list.innerHTML = array[i];
         list.style = 'cursor:pointer'
         list.onclick = function () {
+            console.log(i);
             displayDetailsModal('', ''+texts[i]);
         }
 
