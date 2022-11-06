@@ -40,6 +40,7 @@ TLDR: Tornadoes tore across parts of three states.
 --
 Passage: """ + text + "\nTLDR:",
         max_tokens=200,
+        k=3,
         temperature=temperature,
         stop_sequences=["\n"])
 
