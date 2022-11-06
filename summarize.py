@@ -27,7 +27,7 @@ co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
 # summary = response.generations[0].text
 
 
-def summarize_single(text):
+def summarize_single(text, temperature=0.0):
     response = co.generate(
         model='xlarge',
         prompt="""Passage: Is Wordle getting tougher to solve? Players seem to be convinced that the game has gotten harder in recent weeks ever since The New York Times bought it from developer Josh Wardle in late January. The Times has come forward and shared that this likely isn't the case. That said, the NYT did mess with the back end code a bit, removing some offensive and sexual language, as well as some obscure words There is a viral thread claiming that a confirmation bias was at play. One Twitter user went so far as to claim the game has gone to "the dusty section of the dictionary" to find its latest words.
@@ -39,13 +39,19 @@ Passage: ArtificialIvan, a seven-year-old, London-based payment and expense mana
 TLDR: ArtificialIvan has raised $190 million in Series C funding.
 --
 Passage: """ + text + "\n\nTLDR:",
-        max_tokens=400,
-        temperature=0,
+        max_tokens=300,
+        temperature=temperature,
         stop_sequences=["\n"])
 
     summary = response.generations[0].text
     # remove space and stop sequence
-    return summary[:-2].strip()
+    summary = summary[:-2].strip()
+
+    if len(summary) > 200:
+        print('RETRYING BECAUSE OF ' + str(len(summary)) +
+              ' LENGTH' + ' ' + str(temperature))
+        return summarize_single(text, temperature=temperature + 0.1)
+    return summary
 
 
 def group_sentences(text):
