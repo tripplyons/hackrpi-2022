@@ -5,11 +5,11 @@ guiBox = document.getElementById('uploadBox');
 finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
-buttonDiv    = document.getElementById('buttonDiv');
+buttonDiv = document.getElementById('buttonDiv');
 downloadButton = document.getElementById('DownloadButton');
 loader = document.createElement('div');
-loader.style['margin-bottom']='20px';
-loader.style['margin-top']   ='20px';
+loader.style['margin-bottom'] = '20px';
+loader.style['margin-top'] = '20px';
 loader.id = 'loader_wrapper';
 var bigArray = [];
 k = document.createElement('object');
@@ -34,14 +34,14 @@ window.onclick = function (event) {
         detailsModal.style.display = "none";
     }
 }
-downloadButton.onclick = function() {
+downloadButton.onclick = function () {
     bruh = prompt('File name:', 'summary.txt');
-    download(bruh?bruh:1, bigArray.join('\n'))
+    download(bruh ? bruh : 1, bigArray.join('\n'))
 }
 closeSpan.onclick = function () {
     detailsModal.style.display = "none";
 }
-linkInput.onclick = e=>{
+linkInput.onclick = e => {
     linkInput.placeholder = "";
 }
 linkInput.addEventListener('keydown', uploadLink);
@@ -87,6 +87,7 @@ function dropHandler(ev) {
                 const file = item.getAsFile();
                 console.log(file);
                 let formData = new FormData();
+                loading();
 
                 formData.append("file", file);
                 fetch('/upload_file', { method: "POST", body: formData }).then(function (e) {
@@ -108,7 +109,7 @@ async function setCaption(e) {
     resultsDisplay.style.display = "block";
     selectionInterface.style.display = "none";
     texts = e.split('\n');
-    texts = texts.filter(e=>e.length);
+    texts = texts.filter(e => e.length);
     console.log(texts);
     var array = [];
     async function getSummary(text) {
@@ -131,8 +132,15 @@ async function setCaption(e) {
             console.log(i);
             displayDetailsModal('', '' + texts[i]);
         }
-
+        var temp = false;
+        var guiElement = document.querySelector("#gui_box");
+        if(Math.abs(guiElement.scrollHeight-guiElement.scrollTop-guiElement.offsetHeight) < 5){
+            temp = true;
+        }
         resultsList.append(list);
+        if(temp){ 
+            document.querySelector("#gui_box").scrollTo(0, document.querySelector("#gui_box").scrollHeight);
+        }
     }
     stopLoading();
     bigArray = array;
@@ -156,7 +164,7 @@ function displayDetailsModal(title, message) {
     var infoText = document.getElementById("DetailedResultsModalText");
     infoText.innerHTML = message;
     detailsModal.style.display = "block";
-    closeSpan.style.width = closeSpan.offsetHeight+'px'
+    closeSpan.style.width = closeSpan.offsetHeight + 'px'
 }
 
 
