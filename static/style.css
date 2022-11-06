@@ -114,3 +114,9 @@ img{
 	height: 65%;
 	object-fit: contain;
 }
+#resultsList {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 6px;
+	
+}

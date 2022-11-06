@@ -2,13 +2,17 @@ inputDiv = document.getElementById('uploadBox');
 linkInput = document.getElementById('linkInput');
 goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
+finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
+loader = document.createElement('div');
+loader.style['margin-bottom']='20px'
 k = document.createElement('object');
-k.data = 'bars.svg'
+k.data = '/static/bars.svg'
 k.type = "image/svg+xml"
-guiBox.append(k);
-
+k.width = 50
+k.height = 50
+loader.appendChild(k);
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
@@ -50,10 +54,9 @@ function uploadLink(e) {
                 showError();
             } else {
                 response.text().then(f => {
-                    setCaption(f).then(stopLoading);
+                    setCaption(f);
                 });
             }
-            stopLoading();
         });
     }
 }
@@ -82,7 +85,7 @@ function dropHandler(ev) {
                     }
                     else {
                         e.text().then(f => {
-                            setCaption(f).then(stopLoading);
+                            setCaption(f);
                         });
                     }
                 });
@@ -105,6 +108,7 @@ async function setCaption(e) {
 
     resultsList = document.getElementById('resultsList');
     for (let i = 0; i < texts.length; i++) {
+        console.log(array);
         console.log(texts[i]);
         array.push(await getSummary(texts[i]));
         // display things
@@ -118,15 +122,18 @@ async function setCaption(e) {
 
         resultsList.append(list);
     }
+    stopLoading();
     return array.join('\n')
 }
 
 function loading() {
     selectionInterface.style.display = 'none';
     resultsDisplay.style.display = 'block';
+    finalGuiBox.appendChild(loader);
     console.log("STARTED LOADING");
 }
 function stopLoading() {
+    finalGuiBox.removeChild(loader);
     console.log("STOPPED LOADING");
 }
 function displayDetailsModal(title, message) {
