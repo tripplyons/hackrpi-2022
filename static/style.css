@@ -39,13 +39,20 @@ p{
 	font-size: 2vh;
 	margin: 1vh;
 }
-#uploadBox {
+.gui_box{
 	box-shadow: 0px 10px 15px rgba(0,0,0,0.30);
 	width: 60vw;
-	height: 35vh;
+	min-height: 10vh;
+	max-height: 70vh;
 	background: #9FC3D2;
 	border-radius: 10px;
 	max-width: 600px;
+}
+ul{
+	margin: 10vh auto;
+}
+#uploadBox {
+	height: 35vh;
 }
 #linkInput{
 	text-align: center;
