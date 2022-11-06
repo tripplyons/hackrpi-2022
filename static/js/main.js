@@ -3,6 +3,7 @@ linkInput = document.getElementById('linkInput');
 goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
+uploadForm = document.getElementById('uploadForm');
 
 
 resultsDisplay.style.display = "none";
@@ -31,8 +32,10 @@ function showError() {
 }
 
 function uploadLink(e) {
-    console.log('bruh');
-    if (!e.key || e.key == 'Enter') {
+    if(!linkInput.value){
+        uploadForm.submit();
+    }
+    else if (!e.key || e.key == 'Enter') {
         console.log(e)
         loading();
         fetch("/g_url?url=" + linkInput.value, {
@@ -124,5 +127,6 @@ function stopLoading() {
 function displayDetailsModal(title, message){
     var infoText = document.getElementById("DetailedResultsModalText");
     infoText.innerHTML = message;
+    detailsModal.style.display = "block";
 }
 
