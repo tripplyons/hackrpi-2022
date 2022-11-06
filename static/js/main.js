@@ -6,7 +6,7 @@ finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
 buttonDiv    = document.getElementById('buttonDiv');
-downloadButton = document.getElementById('downloadButton');
+downloadButton = document.getElementById('DownloadButton');
 loader = document.createElement('div');
 loader.style['margin-bottom']='20px';
 loader.style['margin-top']   ='20px';
@@ -33,7 +33,10 @@ window.onclick = function (event) {
         detailsModal.style.display = "none";
     }
 }
-
+downloadButton.onclick = function() {
+    bruh = prompt('File name:', 'summary.txt');
+    download(bruh?bruh:1, bigArray.join('\n'))
+}
 closeSpan.onclick = function () {
     detailsModal.style.display = "none";
 }
