@@ -13,6 +13,7 @@ h1{
 	color: white;
 	font-size: 5vh;
 	margin: 2vh;
+	margin-bottom: 0px;
 }
 p{
 	font-size: 2vh;
@@ -22,6 +23,10 @@ img{
 	margin: 2vh;
 	height: 65%;
 	object-fit: contain;
+}
+h3{
+	font-weight: normal;
+	margin-top: 0px;
 }
 .modal {
   display: none;
