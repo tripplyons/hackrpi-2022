@@ -6,13 +6,15 @@ finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
 loader = document.createElement('div');
+loader.style['margin-bottom']='20px';
+loader.style['margin-top']   ='20px';
+loader.id = 'loader_wrapper';
 
-loader.style['margin-bottom']='20px'
 k = document.createElement('object');
-k.data = '/static/bars.svg'
-k.type = "image/svg+xml"
-k.width = 50
-k.height = 50
+k.data = '/static/bars.svg';
+k.type = "image/svg+xml";
+k.width = 50;
+k.height = 50;
 loader.appendChild(k);
 
 resultsDisplay.style.display = "none";
@@ -99,9 +101,7 @@ function dropHandler(ev) {
 async function setCaption(e) {
     resultsDisplay.style.display = "block";
     selectionInterface.style.display = "none";
-
     texts = e.split('\n');
-    console.log(texts);
     var array = [];
     async function getSummary(text) {
         let res = await fetch('/s_text', { method: "POST", body: text });
@@ -117,6 +117,8 @@ async function setCaption(e) {
         list = document.createElementNS("http://www.w3.org/1999/xhtml", 'li');
         list.innerHTML = array[i];
         list.style = 'cursor:pointer'
+        resultsList.style.display = 'block';
+        loader.style['margin-top'] = '0px';
         list.onclick = function () {
             console.log(i);
             displayDetailsModal('', '' + texts[i]);
@@ -131,11 +133,14 @@ async function setCaption(e) {
 function loading() {
     selectionInterface.style.display = 'none';
     resultsDisplay.style.display = 'block';
+    resultsList.style.display = 'none';
     finalGuiBox.appendChild(loader);
+    resetButton.style.display = 'none';
     console.log("STARTED LOADING");
 }
 function stopLoading() {
     finalGuiBox.removeChild(loader);
+    resetButton.style.display = 'block';
     console.log("STOPPED LOADING");
 }
 function displayDetailsModal(title, message) {
