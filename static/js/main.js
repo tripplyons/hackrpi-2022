@@ -4,12 +4,18 @@ goButton = document.getElementById('GoButton');
 guiBox = document.getElementById('uploadBox');
 resultsDisplay = document.getElementById('resultsDisplay');
 uploadForm = document.getElementById('uploadForm');
+resetButton = document.getElementById('resetButton');
 
 
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
 closeSpan = document.getElementById("closeSpan");
+
+resetButton.onclick = () => {
+    uploadForm.reset();
+    location.reload();
+}
 
 closeSpan.onclick = function () {
     detailsModal.style.display = "none";
