@@ -1,7 +1,9 @@
 import numpy as np
 from tqdm import tqdm
 import cohere
-co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
+
+with open("API_KEY.txt", 'r') as f:
+    co = cohere.Client(f.read().strip())
 
 
 # if __name__ == '__main__':
@@ -27,7 +29,7 @@ co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
 # summary = response.generations[0].text
 
 
-def summarize_single(text, temperature=0.0):
+def summarize_single(text, temperature=0.2):
     response = co.generate(
         model='xlarge',
         prompt="""That seems like a pretty straightforward directive. You could put a lot of stuff on the ground and have it stay there. Years ago, I optimistically stacked these pavers behind my shed with the false hope that I would use them in a landscaping project someday, but their most likely future is to sit here in the shady purgatory for all of eternity. Unfortunately, buildings and other structures are a little different. Mainly, they're large enough that one part could move relative to the other parts, a phenomenon we call differential movement. When you move one piece of anything relative to the rest of it, you introduce stress
@@ -37,7 +39,7 @@ Tonight, the deadly tornado outbreak that tore across parts of three states. Mor
 TLDR: Tornadoes tore across parts of three states.
 --
 Passage: """ + text + "\nTLDR:",
-        max_tokens=300,
+        max_tokens=200,
         temperature=temperature,
         stop_sequences=["\n"])
 
