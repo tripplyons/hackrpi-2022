@@ -30,8 +30,7 @@ co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
 def summarize_single(text, temperature=0.0):
     response = co.generate(
         model='xlarge',
-        prompt="""
-Tonight, the deadly tornado outbreak that tore across parts of three states. More than a dozen powerful twisters ripping across Texas, Arkansas, and Oklahoma. Entire neighborhoods leveled more than 100 homes destroyed. Terrified residents fleeing for cover
+        prompt="""Tonight, the deadly tornado outbreak that tore across parts of three states. More than a dozen powerful twisters ripping across Texas, Arkansas, and Oklahoma. Entire neighborhoods leveled more than 100 homes destroyed. Terrified residents fleeing for cover
 TLDR: Tornadoes tore across parts of three states.
 
 """ + text + "\nTLDR:",
