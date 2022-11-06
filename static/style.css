@@ -6,6 +6,8 @@ body{
 }
 #resultsDisplay{
 	display: none;
+}
+#gui_box{
 	overflow-y: scroll;
 }
 #closeSpan{
