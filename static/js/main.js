@@ -148,7 +148,7 @@ function loading() {
 }
 function stopLoading() {
     finalGuiBox.removeChild(loader);
-    buttonDiv.style.display = 'block';
+    buttonDiv.style.display = 'inline';
     console.log("STOPPED LOADING");
 }
 function displayDetailsModal(title, message) {
