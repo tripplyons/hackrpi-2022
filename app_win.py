@@ -3,8 +3,8 @@ from flask import Flask, flash, request, redirect, url_for, request
 from werkzeug.utils import secure_filename
 import json
 import os
-from summarize import summarize, group_sentences, summarize_single
-
+from summarize import summarize_single, group_sentences
+path = True
 app = Flask(__name__)
 
 
@@ -19,13 +19,9 @@ def do_link_transcription():
     url = args.get('url')
 
     unique = hash(url)
-
-    if os.path.exists(path):
+    if path:
         text = open('example-transcripts/vector.txt').read()
         groups = '\n'.join(group_sentences(text))
-
-        os.remove(path)
-
         return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
     else:
         return 'Download Error', 500
@@ -34,15 +30,10 @@ def do_link_transcription():
 @app.route("/upload_file", methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        file = request.files['file']
-        path = "tmp/" + str(hash(file.filename))
-        file.save(path)
-
-        if os.path.exists(path):
+        if path:
             text = open('example-transcripts/vector.txt').read()
             groups = '\n'.join(group_sentences(text))
 
-            os.remove(path)
 
             return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
