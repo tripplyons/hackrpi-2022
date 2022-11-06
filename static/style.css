@@ -29,12 +29,14 @@ body{
 #DetailedResultsModalContent{
 	background: #3943B7;
 	border-radius: 10px;
-	padding: 20px;
+	padding: 10px;
+	padding-bottom:5px;
 	width: 60vw;
 	max-width: 600px;
 	margin: 10% auto;
 	max-height: 65vh;
 	overflow-y: scroll;
+
 }
 #close {
   color: #aaa;
@@ -66,6 +68,7 @@ ul{
 }
 #uploadBox {
 	height: 35vh;
+	cursor:default;
 }
 #linkInput{
 	transition-duration: 0.2s;
@@ -118,5 +121,14 @@ img{
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 6px;
-	
+}
+#closeSpan {
+	cursor:pointer;
+	background:#ff0000;
+	border-radius:10px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+#DetailedResultsModalContent{
+	text-align:left;
 }

@@ -6,6 +6,7 @@ finalGuiBox = document.getElementById('gui_box');
 resultsDisplay = document.getElementById('resultsDisplay');
 resetButton = document.getElementById('resetButton');
 loader = document.createElement('div');
+
 loader.style['margin-bottom']='20px'
 k = document.createElement('object');
 k.data = '/static/bars.svg'
@@ -13,6 +14,7 @@ k.type = "image/svg+xml"
 k.width = 50
 k.height = 50
 loader.appendChild(k);
+
 resultsDisplay.style.display = "none";
 selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
@@ -31,11 +33,11 @@ window.onclick = function (event) {
 closeSpan.onclick = function () {
     detailsModal.style.display = "none";
 }
-
+linkInput.onclick = e=>{
+    linkInput.placeholder = "";
+}
 linkInput.addEventListener('keydown', uploadLink);
 goButton.onclick = uploadLink;
-
-inputDiv.style = 'cursor: pointer;'
 
 function showError() {
     alert("Error");
@@ -140,5 +142,6 @@ function displayDetailsModal(title, message) {
     var infoText = document.getElementById("DetailedResultsModalText");
     infoText.innerHTML = message;
     detailsModal.style.display = "block";
+    closeSpan.style.width = closeSpan.offsetHeight+'px'
 }
 
