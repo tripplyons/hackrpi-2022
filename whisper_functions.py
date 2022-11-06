@@ -77,3 +77,8 @@ def download(url, path='tmp/tmp.wav'):
 
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
+
+
+if __name__ == '__main__':
+    download("https://www.youtube.com/watch?v=XxCha4Kez9c")
+    print(transcribe("tmp/tmp.wav"))
