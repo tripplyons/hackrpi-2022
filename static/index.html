@@ -1,21 +1,29 @@
 <html>
-    <head>
-        <title>yt 2 smry</title>
-        <link rel="stylesheet" type="text/css" href="/static/style.css">
-    </head>
-    <body>
-        <center>
-            <h1>yt 2 smry</h1>
-            <h2><i>AI Video Summarizer</i></h2>
-            <div class="modal">
-                <div id="DetailedResultsModal">
-                    <span id="close">&times</span>
-                    <p>Detailed Summary Info</p>
-                </div>
+
+<head>
+    <title>yt 2 smry</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+    <center>
+        <h1>yt 2 smry</h1>
+        <h2><i>AI Video Summarizer</i></h2>
+        <div class="modal">
+            <div id="DetailedResultsModal">
+                <span id="close">&times</span>
+                <p>Detailed Summary Info</p>
             </div>
-            <div id="uploadBox" ondrop="dropHandler(event);"
-            ondragover="dragOverHandler(event);">
-            <p class="prompt">Upload a File...</p>
+        </div>
+        <div id="resultsDisplay">
+            <ul id="resultsList">
+            </ul>
+            <button class="GoButton" onclick="location.reload()">Do Again</button>
+        </div>
+        <div id="selectionInterface">
+
+            <div id="uploadBox" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                <p class="prompt">Upload a File...</p>
                 <img src="/static/File_Logo.svg" id="file_logo">
             </div>
             <h2><i>OR</i></h2>
@@ -23,7 +31,9 @@
                 <input id="linkInput" placeholder="copy a video link..."></input>
             </div>
             <button class="GoButton">Summarize</button>
-            <script src="/static/js/main.js"></script>
-        </center>
-    </body>
+        </div>
+        <script src="/static/js/main.js"></script>
+    </center>
+</body>
+
 </html>
