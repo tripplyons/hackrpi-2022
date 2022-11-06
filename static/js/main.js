@@ -17,6 +17,16 @@ resetButton.onclick = () => {
     location.reload();
 }
 
+document.onload = () => {
+    uploadForm.reset();
+}
+
+window.onclick = function(event) {
+  if (event.target == detailsModal) {
+    detailsModal.style.display = "none";
+  }
+}
+
 closeSpan.onclick = function () {
     detailsModal.style.display = "none";
 }
