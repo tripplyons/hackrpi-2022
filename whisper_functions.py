@@ -35,11 +35,25 @@ def transcribe(audio):
         result = whisper.decode(model, mel, options)
         result_text = result.text
 
+        letters_overlap_index = -1
+
+        letters = get_letters(text)
+        result_letters = get_letters(result_text)
+
+        for i in range(1, len(result_letters)):
+            if letters[-i:] == result_letters[:i]:
+                letters_overlap_index = i
+
+        if letters_overlap_index == -1:
+            letters_overlap_index = 0
+
         overlap_index = -1
 
-        for i in range(len(result_text)):
-            if get_letters(text[-i:]) == get_letters(result_text[:i]):
-                overlap_index = i
+        if letters_overlap_index != 0:
+            for i in range(len(result_text)):
+                if get_letters(result_text[:i]) == result_letters[:letters_overlap_index]:
+                    overlap_index = i
+
         if overlap_index == -1:
             overlap_index = 0
 
