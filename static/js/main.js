@@ -26,6 +26,7 @@ closeSpan.onclick = function () {
 }
 
 linkInput.addEventListener('keydown', uploadLink);
+goButton.onclick = uploadLink;
 
 inputDiv.style = 'cursor: pointer;'
 
@@ -109,7 +110,7 @@ async function setCaption(e) {
         list.style = 'cursor:pointer'
         list.onclick = function () {
             console.log(i);
-            displayDetailsModal('', ''+texts[i]);
+            displayDetailsModal('', '' + texts[i]);
         }
 
         resultsList.append(list);
