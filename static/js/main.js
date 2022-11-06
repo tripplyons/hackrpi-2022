@@ -110,6 +110,7 @@ async function setCaption(e) {
 
     console.log(e);
     texts = e.split('\n');
+    texts = texts.filter(e=>e.length>0);
     var array = [];
     console.log(texts);
     async function getSummary(k) {
