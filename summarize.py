@@ -1,7 +1,9 @@
 import numpy as np
 from tqdm import tqdm
+import parmap
 import cohere
-co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
+
+API_KEY = 'Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu'
 
 
 # if __name__ == '__main__':
@@ -28,6 +30,8 @@ co = cohere.Client('Rwi47oVJlWOajOUfjnaLuqLcGwZpPMhciWAmcZiu')
 
 
 def summarize_single(text):
+    co = cohere.Client(API_KEY)
+
     response = co.generate(
         model='xlarge',
         prompt="""Passage: Is Wordle getting tougher to solve? Players seem to be convinced that the game has gotten harder in recent weeks ever since The New York Times bought it from developer Josh Wardle in late January. The Times has come forward and shared that this likely isn't the case. That said, the NYT did mess with the back end code a bit, removing some offensive and sexual language, as well as some obscure words There is a viral thread claiming that a confirmation bias was at play. One Twitter user went so far as to claim the game has gone to "the dusty section of the dictionary" to find its latest words.
@@ -44,11 +48,14 @@ Passage: """ + text + "\n\nTLDR:",
         stop_sequences=["\n"])
 
     summary = response.generations[0].text
+    print(summary)
     # remove space and stop sequence
     return summary[:-2].strip()
 
 
 def group_sentences(text):
+    co = cohere.Client(API_KEY)
+
     sentences = text.split(". ")
 
     sentences_per_paragraph = 8
@@ -81,15 +88,15 @@ def group_sentences(text):
 
 
 def summarize(text):
-    summary = ""
+    total_summary = ""
 
     groups = group_sentences(text)
 
-    for group in tqdm(groups):
-        summary += summarize_single(group)
-        if summary[-1] != '.':
-            summary += '.'
-        summary += ' '
+    summaries = parmap.map(summarize_single, groups, pm_pbar=True)
+
+    for summary in summaries:
+        total_summary += summary
+        total_summary += "\n"
 
     return summary.strip()
 
