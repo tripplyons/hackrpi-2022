@@ -23,25 +23,8 @@ def do_link_transcription():
 
     path = 'tmp/' + str(unique) + '.wav'
 
-    download(url, path)
-
-    if os.path.exists(path):
-        text = transcribe(path)
-        groups = '\n'.join(group_sentences(text))
-
-        os.remove(path)
-
-        return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
-    else:
-        return 'Download Error', 500
-
-
-@app.route("/upload_file", methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        path = "tmp/" + str(hash(file.filename))
-        file.save(path)
+    try:
+        download(url, path)
 
         if os.path.exists(path):
             text = transcribe(path)
@@ -50,7 +33,28 @@ def upload_file():
             os.remove(path)
 
             return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+    except:
+        pass
+    return 'Download Error', 500
 
+
+@app.route("/upload_file", methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        try:
+            file = request.files['file']
+            path = "tmp/" + str(hash(file.filename))
+            file.save(path)
+
+            if os.path.exists(path):
+                text = transcribe(path)
+                groups = '\n'.join(group_sentences(text))
+
+                os.remove(path)
+
+                return groups, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+        except:
+            pass
         return 'Upload Error', 500
     return '''
     <!doctype html>
