@@ -10,15 +10,25 @@ selectionInterface = document.getElementById('selectionInterface');
 detailsModal = document.getElementById('DetailedResultsModal');
 closeSpan = document.getElementById("closeSpan");
 
-closeSpan.onclick = function() {
-  detailsModal.style.display = "none";
+closeSpan.onclick = function () {
+    detailsModal.style.display = "none";
 }
 
 linkInput.addEventListener('keydown', uploadLink)
 goButton.onclick = uploadLink;
 
-inputDiv.onclick=e=>{document.getElementById('fileInput').click();}
-inputDiv.style  ='cursor: pointer;'
+inputDiv.onclick = e => {
+    document.getElementById('fileInput').click();
+}
+inputDiv.style = 'cursor: pointer;'
+
+document.getElementById('hiddenFrame').onload = function () {
+    setCaption(this.contentDocument.body.innerText);
+}
+
+function showError() {
+    alert("Error");
+}
 
 function uploadLink(e) {
     console.log('bruh');
@@ -29,10 +39,14 @@ function uploadLink(e) {
             "credentials": "omit",
             "method": "GET",
             "mode": "cors"
-        }).then(function (e) {
-            e.text().then(f => {
-                setCaption(f).then(stopLoading);
-            });
+        }).then(function (response) {
+            if (!response.ok) {
+                showError();
+            } else {
+                response.text().then(f => {
+                    setCaption(f).then(stopLoading);
+                });
+            }
             stopLoading();
         });
     }
@@ -58,9 +72,14 @@ function dropHandler(ev) {
 
                 formData.append("file", file);
                 fetch('/upload_file', { method: "POST", body: formData }).then(function (e) {
-                    e.text().then(f => {
-                        setCaption(f).then(stopLoading);
-                    });
+                    if (!e.ok) {
+                        showError();
+                    }
+                    else {
+                        e.text().then(f => {
+                            setCaption(f).then(stopLoading);
+                        });
+                    }
                 });
             }
         })

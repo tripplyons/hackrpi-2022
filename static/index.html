@@ -28,15 +28,20 @@
                 <p class="prompt">Upload a File...</p>
                 <img src="/static/File_Logo.svg" id="file_logo">
             </div>
+            <form id="uploadForm" action="/upload_file" method="POST" enctype="multipart/form-data"
+                target="hiddenFrame">
+                <input id="fileInput" type="file" name="file" style="display:none;">
+                <input class="GoButton" id="submitFile" type="submit">
+            </form>
             <h2><i>OR</i></h2>
             <div>
                 <input id="linkInput" placeholder="copy a video link..."></input>
             </div>
             <button class="GoButton" id="GoButton">Summarize</button>
         </div>
-        <script src="/static/js/main.js"></script>
         <!-- This is not supposed to show dont worry-->
-        <input id="fileInput" type="file" style="display:none;"/>
+        <iframe id="hiddenFrame" name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+        <script src="/static/js/main.js"></script>
     </center>
 </body>
 
