@@ -12,7 +12,7 @@ linkInput.addEventListener('keydown', function(e){
             "mode": "cors"
         }).then(function(e) {
             e.text().then(f=>{
-                setCaption(e);
+                setCaption(f);
             })
         });
     }
@@ -42,7 +42,7 @@ function dropHandler(ev) {
                 formData.append("file", file);
                 fetch('/upload_file', {method: "POST", body: formData}).then(function(e) {
                     e.text().then(f=>{
-                        setCaption(e);
+                        setCaption(f);
                     })
                 });
                 stopLoading();
